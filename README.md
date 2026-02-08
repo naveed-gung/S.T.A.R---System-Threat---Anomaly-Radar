@@ -229,3 +229,4 @@ S.T.A.R. is licensed under the [GNU General Public License v3.0](LICENSE).
 <p align="center">
   <sub>S.T.A.R. - System Threat & Anomaly Radar | Kernel-level real-time threat detection</sub>
 </p>
+Build Status: Passing
