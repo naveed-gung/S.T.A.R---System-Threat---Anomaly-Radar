@@ -84,3 +84,6 @@ ctest --output-on-failure
 ## License
 
 By contributing, you agree that your contributions will be licensed under the GPLv3 license (core engine) or MIT license (UI components) as specified in the project LICENSE file.
+
+## Testing
+Please ensure all builds pass before submitting PRs.
