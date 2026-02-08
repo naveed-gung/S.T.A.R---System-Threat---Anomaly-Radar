@@ -1,0 +1,323 @@
+enhaced
+Enhanced SRS: S.T.A.R. - System Threat & Anomaly Radar
+1. Project Overview
+Project Name: S.T.A.R. (System Threat & Anomaly Radar)
+Language: C (Core Engine) + Python/Electron (UI)
+Type: Cross-platform, kernel-integrated real-time threat detection system
+License: GPLv3 (Open Source)
+Core Concept: A dual-architecture (Windows/Linux) kernel-level security monitor with real-time detection, modern UI, and forensic capabilities for detecting rootkits, memory injections, and kernel manipulation.
+
+2. Functional Requirements
+2.1 Core Detection Engine (Cross-Platform)
+REQ-MEM-001: Live Process Memory Analysis
+text
+- Enumerate processes via direct EPROCESS/KERNEL_STRUCT walking (not APIs)
+- Scan memory regions for: executable heaps, RWX pages, memory-mapped PE files
+- Detect reflective DLL injection via PE header scanning in non-image memory
+- Identify anomalous VAD (Virtual Address Descriptor) patterns
+- Cross-reference memory sections with loaded module lists
+REQ-HOOK-002: System Call & Kernel Hook Detection
+text
+Windows-Specific:
+- SSDT (System Service Descriptor Table) integrity validation
+- Shadow SSDT monitoring for GUI subsystem hooks
+- IDT (Interrupt Descriptor Table) hook detection
+- MSR (Model Specific Register) checks for syscall redirection
+- Driver IRP (I/O Request Packet) function table validation
+
+Linux-Specific:
+- sys_call_table integrity checking
+- Interrupt handler (IDT) validation  
+- Kernel function kprobes/jprobes detection
+- System call entry point modification detection
+- VDSO (Virtual Dynamic Shared Object) manipulation detection
+REQ-KERNEL-003: Advanced Kernel Object Analysis
+text
+- Direct Kernel Object Manipulation (DKOM) detection via list traversal
+- Hidden process detection (PID recycling, unlinked EPROCESS/task_struct)
+- Driver object validation (authenticode/signature checks on Windows)
+- Notification callback enumeration and validation
+- Timer and DPC (Deferred Procedure Call) queue analysis
+REQ-ADV-004: Behavioral & Anomaly Detection (NEW)
+text
+- Process behavior profiling (baseline learning mode)
+- Detection of code injection techniques: APC, SetWindowHook, thread hijacking
+- Parent-child process relationship anomalies
+- Handle inheritance and token manipulation detection
+- Network connection attempts from unexpected processes
+2.2 Real-Time Monitoring Architecture
+REQ-RT-005: Kernel Driver Components (NEW)
+text
+Windows Driver (star.sys):
+- Filter driver for process/thread creation notifications
+- Object manager callback registration
+- Memory protection callback for executable allocations
+- Network connection monitoring via WFP (Windows Filtering Platform)
+
+Linux Kernel Module (star.ko):
+- LSM (Linux Security Module) integration
+- Netfilter hooks for network monitoring
+- Process tracepoints via tracefs
+- Securityfs interface for user-space communication
+REQ-RT-006: Real-Time Event Processing
+text
+- Event queue with priority levels (critical/high/medium/low)
+- Lock-free ring buffer for kernel-to-user communication
+- Configurable sampling rates for performance scaling
+- Event correlation engine for attack chain detection
+2.3 User Interface & Management (NEW)
+REQ-UI-007: Modern Web-Based Dashboard
+text
+- Real-time threat visualization with D3.js/WebGL
+- Process tree visualization with threat highlighting
+- Timeline view of security events
+- Interactive memory map explorer
+- Performance impact monitor (CPU/memory/IO)
+REQ-UI-008: Management Features
+text
+- Policy management (whitelists/blacklists)
+- Alert rules and notification configuration  
+- Historical analysis and trend reporting
+- Export capabilities (JSON, PCAP, memory dumps)
+- API for third-party integration (REST + WebSocket)
+2.4 Analysis & Reporting
+REQ-ANAL-009: Enhanced Anomaly Scoring
+text
+- Multi-factor scoring system (0-1000 scale)
+- Dynamic weight adjustment based on system context
+- Confidence scoring with uncertainty quantification
+- MITRE ATT&CK technique mapping
+- False positive learning and adaptive thresholds
+REQ-OUTPUT-010: Forensic & Integration Outputs
+text
+- Structured JSON reports with full event context
+- PCAP capture for network-related incidents
+- Memory dumps with carveable PE/ELF files
+- SIEM integration (Syslog, Windows Event Forwarding)
+- STIX/TAXII threat intelligence format support
+3. Technical Specifications
+3.1 System Architecture
+text
+┌─────────────────────────────────────────────────────────────┐
+│                    Web Dashboard (Port 8080)                │
+│                   Electron Desktop Wrapper                   │
+└───────────────────────────┬─────────────────────────────────┘
+                            │ HTTP/WebSocket
+┌───────────────────────────▼─────────────────────────────────┐
+│               User-Space Daemon (star-daemon)               │
+│  • Event correlation      • Policy enforcement              │
+│  • Alert management      • Reporting engine                 │
+└───────────────────────────┬─────────────────────────────────┘
+                            │ ioctl() / Netlink
+┌───────────────────────────▼─────────────────────────────────┐
+│             Kernel Drivers/Modules (Platform-specific)      │
+│  • Windows: star.sys     • Linux: star.ko                  │
+│  • Real-time monitoring  • Hook detection                  │
+└───────────────────────────┬─────────────────────────────────┘
+                            │ Direct kernel access
+┌───────────────────────────▼─────────────────────────────────┐
+│                    Operating System Kernel                   │
+└─────────────────────────────────────────────────────────────┘
+3.2 Core Data Structures
+c
+// Cross-platform detection entry
+typedef struct _STAR_DETECTION {
+    uint64_t        detection_id;
+    uint32_t        pid;
+    uint32_t        ppid;
+    char            process_name[256];
+    char            detection_type[64];
+    DETECTION_CLASS detection_class;  // MEMORY, HOOK, BEHAVIOR, NETWORK
+    uint64_t        address;
+    uint32_t        threat_score;     // 0-1000
+    uint8_t         confidence;       // 0-100%
+    MITRE_TECHNIQUE mitre_id;
+    char            description[512];
+    uint64_t        timestamp_ns;
+    struct _STAR_DETECTION *next;
+} STAR_DETECTION;
+
+// Kernel communication structure
+typedef struct _KERNEL_EVENT {
+    uint32_t        event_type;
+    uint32_t        pid;
+    uint64_t        address;
+    uint64_t        additional_info[4];
+    uint8_t         stack_trace[STACK_TRACE_SIZE];
+    uint64_t        timestamp;
+} KERNEL_EVENT;
+
+// Behavioral profile
+typedef struct _BEHAVIOR_PROFILE {
+    uint32_t        pid;
+    uint32_t        normal_syscalls[256];
+    uint64_t        avg_memory_usage;
+    uint32_t        avg_thread_count;
+    uint32_t        typical_handles[10];
+    uint64_t        network_connections[20];
+    uint64_t        last_updated;
+} BEHAVIOR_PROFILE;
+3.3 Platform-Specific Implementations
+Windows Implementation
+c
+// Windows kernel driver functions
+NTSTATUS StarDriverEntry(PDRIVER_OBJECT DriverObject, PUNICODE_STRING RegistryPath);
+NTSTATUS StarCreateProcessNotify(PEPROCESS Process, HANDLE ProcessId, BOOLEAN Create);
+NTSTATUS StarLoadImageNotify(PUNICODE_STRING FullImageName, HANDLE ProcessId, PIMAGE_INFO ImageInfo);
+
+// Key Windows APIs for user-space
+- NtQuerySystemInformation with SystemProcessInformation
+- NtQueryVirtualMemory for memory region enumeration
+- DeviceIoControl for driver communication
+- EtwEventWrite for Windows Event Tracing integration
+Linux Implementation
+c
+// Linux kernel module functions
+static int __init star_module_init(void);
+static void __exit star_module_exit(void);
+static int star_process_fork(struct task_struct *parent, struct task_struct *child);
+static int star_file_permission(struct file *file, int mask);
+
+// Key Linux interfaces
+- seq_file for /proc/star interface
+- securityfs for configuration
+- netlink for user-space communication
+- tracepoints for system call monitoring
+3.4 UI Technical Stack
+text
+Frontend:
+- React with TypeScript
+- D3.js for visualizations
+- WebGL for 3D memory maps
+- Electron for desktop packaging
+
+Backend (User-space daemon):
+- libwebsockets for real-time updates
+- libmicrohttpd for REST API
+- SQLite for local event storage
+- Jansson for JSON processing
+4. Performance Requirements
+4.1 Real-Time Constraints
+text
+- Kernel event processing: < 100 microseconds per event
+- User-space event correlation: < 5 milliseconds
+- UI update latency: < 100 milliseconds
+- Full system scan: < 15 seconds (baseline), < 2 seconds (incremental)
+4.2 Resource Limitations
+text
+- Kernel driver memory: < 5MB resident
+- User-space daemon memory: < 50MB
+- UI application memory: < 100MB
+- Disk usage: < 500MB for event storage (configurable)
+- CPU impact: < 3% in idle, < 10% during active scanning
+4.3 Scalability Requirements
+text
+- Support for systems with 1000+ concurrent processes
+- Handle 10,000+ events per second peak load
+- Efficient memory usage for systems with 64GB+ RAM
+- Multi-core optimization (scale with CPU cores)
+5. Safety & Ethical Implementation
+5.1 Security Boundaries
+text
+ETHICAL-001: Local Operation Only
+- No outbound network connections from monitoring components
+- Air-gap compatible operation mode
+- Encrypted local storage for sensitive data
+
+ETHICAL-002: Non-Destructive Operation
+- Read-only access to system structures by default
+- Explicit user confirmation for memory dumping
+- No automatic remediation actions
+
+ETHICAL-003: Anti-Tampering Protection
+- Digital signature verification of all components
+- Self-integrity checking at runtime
+- Detection of tool modification attempts
+5.2 Privacy & Compliance
+text
+PRIVACY-001: Data Minimization
+- Configurable data collection levels
+- Automatic sanitization of PII in dumps
+- Encryption for stored forensic data
+
+PRIVACY-002: Audit Trail
+- Complete logging of all tool activities
+- Cryptographic signing of all reports
+- Chain of custody documentation
+6. Development Roadmap
+Phase 1: Foundation (4 weeks)
+text
+Week 1-2: Cross-platform abstraction layer + basic process enumeration
+Week 3-4: Windows kernel driver skeleton + user-space communication
+Phase 2: Core Detection (6 weeks)
+text
+Week 5-6: Memory analysis engine + PE/ELF parsing
+Week 7-8: Hook detection algorithms (SSDT/sys_call_table)
+Week 9-10: Behavioral profiling + anomaly detection
+Phase 3: Real-Time System (4 weeks)
+text
+Week 11-12: Event correlation engine + alert system
+Week 13-14: Network monitoring integration + MITRE mapping
+Phase 4: UI & Polish (4 weeks)
+text
+Week 15-16: Web dashboard + visualization components
+Week 17-18: Electron wrapper + installer packages
+Week 19-20: Performance optimization + final testing
+7. Testing Strategy
+7.1 Test Environments
+text
+- Windows 10/11 (multiple builds)
+- Linux (Ubuntu 22.04+, RHEL 9+, kernel 5.15+)
+- Virtualized environments (VMware, Hyper-V, KVM)
+- Bare metal testing on dedicated hardware
+7.2 Test Scenarios
+text
+1. Known malware sample execution (in sandbox)
+2. Rootkit installation detection (TDSS, ZeroAccess)
+3. Process injection techniques (10+ variations)
+4. Performance under load (gaming, compilation workloads)
+5. False positive testing on clean systems
+7.3 Integration Testing
+text
+- Antivirus compatibility testing
+- EDR solution coexistence
+- SIEM integration validation
+- API stability and backward compatibility
+8. Open Source Considerations
+8.1 Licensing & Contributions
+text
+- Core engine: GPLv3
+- UI components: MIT License
+- Documentation: Creative Commons Attribution
+- Contribution guidelines with security review process
+- Responsible disclosure policy for vulnerabilities
+8.2 Distribution Packages
+text
+- Windows: MSI installer with signed drivers
+- Linux: .deb, .rpm, and AppImage packages
+- Docker container for analysis-only mode
+- Source code with CMake build system
+9. Success Metrics
+9.1 Technical Metrics
+text
+- Detection rate: >95% for known techniques
+- False positive rate: <1% on clean systems
+- System stability: 99.9% uptime in production testing
+- Performance impact: <5% on standard workloads
+9.2 Usability Metrics
+text
+- Installation time: <5 minutes
+- Time to first detection: <30 seconds after installation
+- UI responsiveness: <100ms for all interactions
+- Documentation completeness: 100% API coverage
+10. Risk Mitigation
+10.1 Technical Risks
+text
+1. Kernel instability: Comprehensive testing + signed drivers
+2. Performance impact: Adaptive sampling + resource limits
+3. Evasion techniques: Multiple detection methods + randomization
+10.2 Security Risks
+text
+1. Tool compromise: Code signing + integrity verification
+2. Data leakage: Local encryption + air-gap mode
+3. Misuse: Clear licensing + ethical guidelines
