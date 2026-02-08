@@ -86,8 +86,8 @@ Operating System Kernel
 
 ```bash
 # Clone the repository
-git clone https://github.com/naveed-gung/S.T.A.R.git
-cd S.T.A.R
+git clone https://github.com/naveed-gung/S.T.A.R---System-Threat---Anomaly-Radar.git
+cd S.T.A.R---System-Threat---Anomaly-Radar
 
 # Configure
 mkdir build && cd build
