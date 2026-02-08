@@ -154,6 +154,10 @@ int main(void)
 
 S.T.A.R. features a React + Electron dashboard that communicates with the daemon via Named Pipes.
 
+<p align="center">
+  <img src="docs/image.png" alt="S.T.A.R. Dashboard Interface" width="800"/>
+</p>
+
 1.  **Start the Daemon**:
     ```powershell
     # In Terminal 1
