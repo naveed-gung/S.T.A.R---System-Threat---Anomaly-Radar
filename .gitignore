@@ -63,3 +63,5 @@ dist/
 *.deb
 *.rpm
 *.AppImage
+
+srs.txt
