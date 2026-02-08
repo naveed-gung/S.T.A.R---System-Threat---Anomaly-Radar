@@ -1,24 +1,24 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 620" width="800" height="620">
   <defs>
     <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#0a0e17"/>
-      <stop offset="100%" style="stop-color:#111827"/>
+      <stop offset="0%" style="stop-color:#0a0f0a"/>
+      <stop offset="100%" style="stop-color:#0d120d"/>
     </linearGradient>
-    <linearGradient id="cyan" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#06b6d4"/>
-      <stop offset="100%" style="stop-color:#22d3ee"/>
+    <linearGradient id="green" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00ff00"/>
+      <stop offset="100%" style="stop-color:#00cc00"/>
     </linearGradient>
-    <linearGradient id="purple" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#8b5cf6"/>
-      <stop offset="100%" style="stop-color:#a78bfa"/>
+    <linearGradient id="green2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00cc00"/>
+      <stop offset="100%" style="stop-color:#00ff00"/>
     </linearGradient>
     <linearGradient id="emerald" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#10b981"/>
-      <stop offset="100%" style="stop-color:#34d399"/>
+      <stop offset="0%" style="stop-color:#00ff88"/>
+      <stop offset="100%" style="stop-color:#00ffaa"/>
     </linearGradient>
     <linearGradient id="amber" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#f59e0b"/>
-      <stop offset="100%" style="stop-color:#fbbf24"/>
+      <stop offset="0%" style="stop-color:#ffaa00"/>
+      <stop offset="100%" style="stop-color:#ff8800"/>
     </linearGradient>
     <filter id="glow">
       <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
@@ -33,145 +33,145 @@
   <rect width="800" height="620" fill="url(#bg)" rx="8"/>
 
   <!-- Title -->
-  <text x="400" y="40" font-family="'Segoe UI', Arial, sans-serif" font-size="18" fill="#f1f5f9" text-anchor="middle" font-weight="600" letter-spacing="3">S.T.A.R. SYSTEM ARCHITECTURE</text>
-  <line x1="250" y1="50" x2="550" y2="50" stroke="#06b6d4" stroke-width="1" opacity="0.4"/>
+  <text x="400" y="40" font-family="'Courier New', monospace" font-size="18" fill="#00ff00" text-anchor="middle" font-weight="700" letter-spacing="3">S.T.A.R. SYSTEM ARCHITECTURE</text>
+  <line x1="250" y1="50" x2="550" y2="50" stroke="#00ff00" stroke-width="1" opacity="0.4"/>
 
   <!-- Layer 1: Web Dashboard -->
   <g transform="translate(100, 70)">
-    <rect width="600" height="90" rx="8" fill="#0f172a" stroke="url(#cyan)" stroke-width="1.5" opacity="0.9"/>
-    <rect width="600" height="3" rx="1.5" fill="url(#cyan)" opacity="0.6"/>
-    <text x="300" y="28" font-family="'Segoe UI', Arial, sans-serif" font-size="14" fill="#06b6d4" text-anchor="middle" font-weight="600">Web Dashboard (Port 8080)</text>
-    <text x="300" y="48" font-family="'Segoe UI', Arial, sans-serif" font-size="11" fill="#94a3b8" text-anchor="middle">Electron Desktop Wrapper</text>
+    <rect width="600" height="90" rx="8" fill="#0a0f0a" stroke="url(#green)" stroke-width="1.5" opacity="0.9"/>
+    <rect width="600" height="3" rx="1.5" fill="url(#green)" opacity="0.6"/>
+    <text x="300" y="28" font-family="'Courier New', monospace" font-size="14" fill="#00ff00" text-anchor="middle" font-weight="700">Web Dashboard (Port 5173)</text>
+    <text x="300" y="48" font-family="'Courier New', monospace" font-size="11" fill="#00cc00" text-anchor="middle">Electron Desktop Wrapper</text>
     <!-- Sub-components -->
     <g transform="translate(30, 58)">
-      <rect width="120" height="22" rx="4" fill="#1e293b" stroke="#334155" stroke-width="0.5"/>
-      <text x="60" y="15" font-family="monospace" font-size="9" fill="#06b6d4" text-anchor="middle">React + TypeScript</text>
+      <rect width="120" height="22" rx="4" fill="#0d120d" stroke="#00ff00" stroke-width="0.5" opacity="0.3"/>
+      <text x="60" y="15" font-family="monospace" font-size="9" fill="#00ff00" text-anchor="middle">React + TypeScript</text>
     </g>
     <g transform="translate(165, 58)">
-      <rect width="80" height="22" rx="4" fill="#1e293b" stroke="#334155" stroke-width="0.5"/>
-      <text x="40" y="15" font-family="monospace" font-size="9" fill="#06b6d4" text-anchor="middle">D3.js</text>
+      <rect width="80" height="22" rx="4" fill="#0d120d" stroke="#00ff00" stroke-width="0.5" opacity="0.3"/>
+      <text x="40" y="15" font-family="monospace" font-size="9" fill="#00ff00" text-anchor="middle">D3.js</text>
     </g>
     <g transform="translate(260, 58)">
-      <rect width="80" height="22" rx="4" fill="#1e293b" stroke="#334155" stroke-width="0.5"/>
-      <text x="40" y="15" font-family="monospace" font-size="9" fill="#06b6d4" text-anchor="middle">WebGL</text>
+      <rect width="80" height="22" rx="4" fill="#0d120d" stroke="#00ff00" stroke-width="0.5" opacity="0.3"/>
+      <text x="40" y="15" font-family="monospace" font-size="9" fill="#00ff00" text-anchor="middle">WebGL</text>
     </g>
     <g transform="translate(355, 58)">
-      <rect width="100" height="22" rx="4" fill="#1e293b" stroke="#334155" stroke-width="0.5"/>
-      <text x="50" y="15" font-family="monospace" font-size="9" fill="#06b6d4" text-anchor="middle">WebSocket</text>
+      <rect width="100" height="22" rx="4" fill="#0d120d" stroke="#00ff00" stroke-width="0.5" opacity="0.3"/>
+      <text x="50" y="15" font-family="monospace" font-size="9" fill="#00ff00" text-anchor="middle">WebSocket</text>
     </g>
     <g transform="translate(470, 58)">
-      <rect width="100" height="22" rx="4" fill="#1e293b" stroke="#334155" stroke-width="0.5"/>
-      <text x="50" y="15" font-family="monospace" font-size="9" fill="#06b6d4" text-anchor="middle">REST API</text>
+      <rect width="100" height="22" rx="4" fill="#0d120d" stroke="#00ff00" stroke-width="0.5" opacity="0.3"/>
+      <text x="50" y="15" font-family="monospace" font-size="9" fill="#00ff00" text-anchor="middle">REST API</text>
     </g>
   </g>
 
   <!-- Connection arrow 1 -->
   <g>
-    <line x1="400" y1="160" x2="400" y2="195" stroke="#64748b" stroke-width="1.5" stroke-dasharray="4,3"/>
-    <polygon points="395,192 400,200 405,192" fill="#64748b"/>
-    <text x="430" y="182" font-family="monospace" font-size="9" fill="#64748b">HTTP / WebSocket</text>
+    <line x1="400" y1="160" x2="400" y2="195" stroke="#00ff00" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.5"/>
+    <polygon points="395,192 400,200 405,192" fill="#00ff00" opacity="0.5"/>
+    <text x="430" y="182" font-family="monospace" font-size="9" fill="#00ff00" opacity="0.7">HTTP / WebSocket</text>
   </g>
 
   <!-- Layer 2: User-Space Daemon -->
   <g transform="translate(100, 200)">
-    <rect width="600" height="110" rx="8" fill="#0f172a" stroke="url(#purple)" stroke-width="1.5" opacity="0.9"/>
-    <rect width="600" height="3" rx="1.5" fill="url(#purple)" opacity="0.6"/>
-    <text x="300" y="28" font-family="'Segoe UI', Arial, sans-serif" font-size="14" fill="#8b5cf6" text-anchor="middle" font-weight="600">User-Space Daemon (star-daemon)</text>
+    <rect width="600" height="110" rx="8" fill="#0a0f0a" stroke="url(#green2)" stroke-width="1.5" opacity="0.9"/>
+    <rect width="600" height="3" rx="1.5" fill="url(#green2)" opacity="0.6"/>
+    <text x="300" y="28" font-family="'Courier New', monospace" font-size="14" fill="#00cc00" text-anchor="middle" font-weight="700">User-Space Daemon (star-daemon)</text>
     <!-- Sub-components row 1 -->
     <g transform="translate(30, 42)">
-      <rect width="125" height="22" rx="4" fill="#1e293b" stroke="#334155" stroke-width="0.5"/>
-      <text x="62" y="15" font-family="monospace" font-size="9" fill="#8b5cf6" text-anchor="middle">Event Correlation</text>
+      <rect width="125" height="22" rx="4" fill="#0d120d" stroke="#00cc00" stroke-width="0.5" opacity="0.3"/>
+      <text x="62" y="15" font-family="monospace" font-size="9" fill="#00cc00" text-anchor="middle">Event Correlation</text>
     </g>
     <g transform="translate(170, 42)">
-      <rect width="130" height="22" rx="4" fill="#1e293b" stroke="#334155" stroke-width="0.5"/>
-      <text x="65" y="15" font-family="monospace" font-size="9" fill="#8b5cf6" text-anchor="middle">Policy Enforcement</text>
+      <rect width="130" height="22" rx="4" fill="#0d120d" stroke="#00cc00" stroke-width="0.5" opacity="0.3"/>
+      <text x="65" y="15" font-family="monospace" font-size="9" fill="#00cc00" text-anchor="middle">Policy Enforcement</text>
     </g>
     <g transform="translate(315, 42)">
-      <rect width="125" height="22" rx="4" fill="#1e293b" stroke="#334155" stroke-width="0.5"/>
-      <text x="62" y="15" font-family="monospace" font-size="9" fill="#8b5cf6" text-anchor="middle">Alert Management</text>
+      <rect width="125" height="22" rx="4" fill="#0d120d" stroke="#00cc00" stroke-width="0.5" opacity="0.3"/>
+      <text x="62" y="15" font-family="monospace" font-size="9" fill="#00cc00" text-anchor="middle">Alert Management</text>
     </g>
     <g transform="translate(455, 42)">
-      <rect width="115" height="22" rx="4" fill="#1e293b" stroke="#334155" stroke-width="0.5"/>
-      <text x="57" y="15" font-family="monospace" font-size="9" fill="#8b5cf6" text-anchor="middle">Reporting Engine</text>
+      <rect width="115" height="22" rx="4" fill="#0d120d" stroke="#00cc00" stroke-width="0.5" opacity="0.3"/>
+      <text x="57" y="15" font-family="monospace" font-size="9" fill="#00cc00" text-anchor="middle">Reporting Engine</text>
     </g>
     <!-- Sub-components row 2 -->
     <g transform="translate(30, 74)">
-      <rect width="110" height="22" rx="4" fill="#1e293b" stroke="#334155" stroke-width="0.5"/>
-      <text x="55" y="15" font-family="monospace" font-size="9" fill="#a78bfa" text-anchor="middle">libwebsockets</text>
+      <rect width="110" height="22" rx="4" fill="#0d120d" stroke="#00ff00" stroke-width="0.5" opacity="0.3"/>
+      <text x="55" y="15" font-family="monospace" font-size="9" fill="#00ff00" text-anchor="middle">libwebsockets</text>
     </g>
     <g transform="translate(155, 74)">
-      <rect width="115" height="22" rx="4" fill="#1e293b" stroke="#334155" stroke-width="0.5"/>
-      <text x="57" y="15" font-family="monospace" font-size="9" fill="#a78bfa" text-anchor="middle">libmicrohttpd</text>
+      <rect width="115" height="22" rx="4" fill="#0d120d" stroke="#00ff00" stroke-width="0.5" opacity="0.3"/>
+      <text x="57" y="15" font-family="monospace" font-size="9" fill="#00ff00" text-anchor="middle">libmicrohttpd</text>
     </g>
     <g transform="translate(285, 74)">
-      <rect width="80" height="22" rx="4" fill="#1e293b" stroke="#334155" stroke-width="0.5"/>
-      <text x="40" y="15" font-family="monospace" font-size="9" fill="#a78bfa" text-anchor="middle">SQLite</text>
+      <rect width="80" height="22" rx="4" fill="#0d120d" stroke="#00ff00" stroke-width="0.5" opacity="0.3"/>
+      <text x="40" y="15" font-family="monospace" font-size="9" fill="#00ff00" text-anchor="middle">SQLite</text>
     </g>
     <g transform="translate(380, 74)">
-      <rect width="80" height="22" rx="4" fill="#1e293b" stroke="#334155" stroke-width="0.5"/>
-      <text x="40" y="15" font-family="monospace" font-size="9" fill="#a78bfa" text-anchor="middle">Jansson</text>
+      <rect width="80" height="22" rx="4" fill="#0d120d" stroke="#00ff00" stroke-width="0.5" opacity="0.3"/>
+      <text x="40" y="15" font-family="monospace" font-size="9" fill="#00ff00" text-anchor="middle">Jansson</text>
     </g>
     <g transform="translate(475, 74)">
-      <rect width="95" height="22" rx="4" fill="#1e293b" stroke="#334155" stroke-width="0.5"/>
-      <text x="47" y="15" font-family="monospace" font-size="9" fill="#a78bfa" text-anchor="middle">MITRE Map</text>
+      <rect width="95" height="22" rx="4" fill="#0d120d" stroke="#00ff00" stroke-width="0.5" opacity="0.3"/>
+      <text x="47" y="15" font-family="monospace" font-size="9" fill="#00ff00" text-anchor="middle">MITRE Map</text>
     </g>
   </g>
 
   <!-- Connection arrow 2 -->
   <g>
-    <line x1="400" y1="310" x2="400" y2="345" stroke="#64748b" stroke-width="1.5" stroke-dasharray="4,3"/>
-    <polygon points="395,342 400,350 405,342" fill="#64748b"/>
-    <text x="430" y="332" font-family="monospace" font-size="9" fill="#64748b">ioctl() / Netlink</text>
+    <line x1="400" y1="310" x2="400" y2="345" stroke="#00ff00" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.5"/>
+    <polygon points="395,342 400,350 405,342" fill="#00ff00" opacity="0.5"/>
+    <text x="430" y="332" font-family="monospace" font-size="9" fill="#00ff00" opacity="0.7">ioctl() / Netlink</text>
   </g>
 
   <!-- Layer 3: Kernel Drivers -->
   <g transform="translate(100, 350)">
-    <rect width="600" height="100" rx="8" fill="#0f172a" stroke="url(#emerald)" stroke-width="1.5" opacity="0.9"/>
+    <rect width="600" height="100" rx="8" fill="#0a0f0a" stroke="url(#emerald)" stroke-width="1.5" opacity="0.9"/>
     <rect width="600" height="3" rx="1.5" fill="url(#emerald)" opacity="0.6"/>
-    <text x="300" y="28" font-family="'Segoe UI', Arial, sans-serif" font-size="14" fill="#10b981" text-anchor="middle" font-weight="600">Kernel Drivers / Modules (Platform-Specific)</text>
+    <text x="300" y="28" font-family="'Courier New', monospace" font-size="14" fill="#00ff88" text-anchor="middle" font-weight="700">Kernel Drivers / Modules (Platform-Specific)</text>
     <!-- Windows side -->
     <g transform="translate(30, 42)">
-      <rect width="260" height="44" rx="6" fill="#1e293b" stroke="#334155" stroke-width="0.5"/>
-      <text x="130" y="18" font-family="'Segoe UI', Arial, sans-serif" font-size="11" fill="#34d399" text-anchor="middle" font-weight="600">Windows: star.sys</text>
-      <text x="130" y="35" font-family="monospace" font-size="8" fill="#64748b" text-anchor="middle">Process notify | WFP | Object callbacks</text>
+      <rect width="260" height="44" rx="6" fill="#0d120d" stroke="#00ff88" stroke-width="0.5" opacity="0.3"/>
+      <text x="130" y="18" font-family="'Courier New', monospace" font-size="11" fill="#00ffaa" text-anchor="middle" font-weight="600">Windows: star.sys</text>
+      <text x="130" y="35" font-family="monospace" font-size="8" fill="#00cc88" text-anchor="middle">Process notify | WFP | Object callbacks</text>
     </g>
     <!-- Linux side -->
     <g transform="translate(310, 42)">
-      <rect width="260" height="44" rx="6" fill="#1e293b" stroke="#334155" stroke-width="0.5"/>
-      <text x="130" y="18" font-family="'Segoe UI', Arial, sans-serif" font-size="11" fill="#34d399" text-anchor="middle" font-weight="600">Linux: star.ko</text>
-      <text x="130" y="35" font-family="monospace" font-size="8" fill="#64748b" text-anchor="middle">LSM | Netfilter | Tracepoints | Securityfs</text>
+      <rect width="260" height="44" rx="6" fill="#0d120d" stroke="#00ff88" stroke-width="0.5" opacity="0.3"/>
+      <text x="130" y="18" font-family="'Courier New', monospace" font-size="11" fill="#00ffaa" text-anchor="middle" font-weight="600">Linux: star.ko</text>
+      <text x="130" y="35" font-family="monospace" font-size="8" fill="#00cc88" text-anchor="middle">LSM | Netfilter | Tracepoints | Securityfs</text>
     </g>
   </g>
 
   <!-- Connection arrow 3 -->
   <g>
-    <line x1="400" y1="450" x2="400" y2="485" stroke="#64748b" stroke-width="1.5" stroke-dasharray="4,3"/>
-    <polygon points="395,482 400,490 405,482" fill="#64748b"/>
-    <text x="430" y="472" font-family="monospace" font-size="9" fill="#64748b">Direct kernel access</text>
+    <line x1="400" y1="450" x2="400" y2="485" stroke="#00ff00" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.5"/>
+    <polygon points="395,482 400,490 405,482" fill="#00ff00" opacity="0.5"/>
+    <text x="430" y="472" font-family="monospace" font-size="9" fill="#00ff00" opacity="0.7">Direct kernel access</text>
   </g>
 
   <!-- Layer 4: OS Kernel -->
   <g transform="translate(100, 490)">
-    <rect width="600" height="60" rx="8" fill="#0f172a" stroke="url(#amber)" stroke-width="1.5" opacity="0.9"/>
+    <rect width="600" height="60" rx="8" fill="#0a0f0a" stroke="url(#amber)" stroke-width="1.5" opacity="0.9"/>
     <rect width="600" height="3" rx="1.5" fill="url(#amber)" opacity="0.6"/>
-    <text x="300" y="38" font-family="'Segoe UI', Arial, sans-serif" font-size="14" fill="#f59e0b" text-anchor="middle" font-weight="600">Operating System Kernel</text>
+    <text x="300" y="38" font-family="'Courier New', monospace" font-size="14" fill="#ffaa00" text-anchor="middle" font-weight="700">Operating System Kernel</text>
   </g>
 
   <!-- Side labels -->
   <g transform="translate(30, 70)">
-    <text x="0" y="50" font-family="monospace" font-size="9" fill="#334155" transform="rotate(-90, 0, 50)">USER SPACE</text>
+    <text x="0" y="50" font-family="monospace" font-size="9" fill="#00ff00" opacity="0.4" transform="rotate(-90, 0, 50)">USER SPACE</text>
   </g>
   <g transform="translate(30, 370)">
-    <text x="0" y="50" font-family="monospace" font-size="9" fill="#334155" transform="rotate(-90, 0, 50)">KERNEL SPACE</text>
+    <text x="0" y="50" font-family="monospace" font-size="9" fill="#00ff00" opacity="0.4" transform="rotate(-90, 0, 50)">KERNEL SPACE</text>
   </g>
 
   <!-- Divider line between user/kernel space -->
-  <line x1="60" y1="340" x2="740" y2="340" stroke="#ef4444" stroke-width="1" stroke-dasharray="6,4" opacity="0.4"/>
-  <text x="770" y="344" font-family="monospace" font-size="8" fill="#ef4444" opacity="0.6">Ring 0</text>
+  <line x1="60" y1="340" x2="740" y2="340" stroke="#ff3300" stroke-width="1" stroke-dasharray="6,4" opacity="0.6"/>
+  <text x="770" y="344" font-family="monospace" font-size="8" fill="#ff3300" opacity="0.8">Ring 0</text>
 
   <!-- Footer -->
-  <text x="400" y="580" font-family="monospace" font-size="9" fill="#334155" text-anchor="middle">S.T.A.R. - System Threat &amp; Anomaly Radar | Architecture v1.0</text>
+  <text x="400" y="580" font-family="monospace" font-size="9" fill="#00ff00" opacity="0.5" text-anchor="middle">S.T.A.R. - System Threat &amp; Anomaly Radar | Architecture v1.0</text>
 
   <!-- Border -->
-  <rect width="800" height="620" fill="none" stroke="#1e293b" stroke-width="1" rx="8"/>
+  <rect width="800" height="620" fill="none" stroke="#00ff00" stroke-width="1" rx="8" opacity="0.3"/>
 </svg>

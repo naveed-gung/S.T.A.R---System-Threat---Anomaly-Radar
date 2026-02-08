@@ -1,0 +1,185 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #050505;
+  color: #00ff41;
+  font-family: 'Share Tech Mono', monospace;
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+}
+
+#root {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* CRT Scanline Effect */
+.scanlines {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0) 50%,
+      rgba(0, 0, 0, 0.2) 50%,
+      rgba(0, 0, 0, 0.2));
+  background-size: 100% 4px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.glow-text {
+  text-shadow: 0 0 5px rgba(0, 255, 65, 0.7);
+}
+
+.critical {
+  color: #ff3333;
+  text-shadow: 0 0 5px rgba(255, 51, 51, 0.7);
+}
+
+.warning {
+  color: #ffaa00;
+  text-shadow: 0 0 5px rgba(255, 170, 0, 0.7);
+}
+
+/* Layout */
+.dashboard {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  grid-template-rows: 60px 1fr auto;
+  height: 100vh;
+  border: 2px solid #003300;
+}
+
+.header {
+  grid-column: 1 / -1;
+  background: #0a0a0a;
+  border-bottom: 2px solid #00ff41;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.sidebar {
+  border-right: 2px solid #003300;
+  padding: 20px;
+  background: rgba(0, 20, 0, 0.5);
+}
+
+.main-content {
+  padding: 20px;
+  overflow-y: auto;
+  background: radial-gradient(circle at center, #0a1a0a 0%, #000000 100%);
+}
+
+.footer {
+  grid-column: 1 / -1;
+  background: #0a0a0a;
+  border-top: 2px solid #00ff41;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  gap: 20px;
+  font-size: 0.9em;
+  z-index: 5;
+}
+
+.footer a {
+  color: #00ff41;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+
+.footer a:hover {
+  color: #fff;
+  text-shadow: 0 0 5px #00ff41;
+}
+
+/* Radar Animation */
+.radar-container {
+  width: 200px;
+  height: 200px;
+  border: 2px solid #00ff41;
+  border-radius: 50%;
+  position: relative;
+  background:
+    linear-gradient(90deg, transparent 49%, #003300 50%, transparent 51%),
+    linear-gradient(0deg, transparent 49%, #003300 50%, transparent 51%),
+    radial-gradient(circle, transparent 30%, #003300 30%, transparent 31%),
+    radial-gradient(circle, transparent 60%, #003300 60%, transparent 61%);
+  margin: 0 auto 20px;
+  box-shadow: 0 0 10px #00ff41 inset;
+  overflow: hidden;
+}
+
+.radar-sweep {
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(45deg, rgba(0, 255, 65, 0) 0%, rgba(0, 255, 65, 0.5) 100%);
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: 100% 100%;
+  animation: sweep 2s infinite linear;
+  border-right: 1px solid #00ff41;
+}
+
+@keyframes sweep {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Log Entries */
+.log-entry {
+  border-left: 3px solid #00ff41;
+  background: rgba(0, 20, 0, 0.8);
+  margin-bottom: 5px;
+  padding: 10px;
+  font-family: 'Share Tech Mono', monospace;
+  animation: fadeIn 0.3s ease-in;
+}
+
+.log-entry.critical {
+  border-left-color: #ff3333;
+  background: rgba(40, 0, 0, 0.3);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #001100;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #00ff41;
+}

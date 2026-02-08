@@ -13,6 +13,10 @@ set(STAR_CORE_HEADERS
 
 set(STAR_CORE_SOURCES
     platform/platform_common.c
+    event/star_event.c
+    detection/star_detection.c
+    detection/memory_scan.c
+    detection/hook_scan.c
 )
 
 # Platform-specific sources

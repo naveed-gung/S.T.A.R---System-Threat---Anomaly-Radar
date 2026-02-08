@@ -78,7 +78,20 @@ docs/               - Documentation
 mkdir build && cd build
 cmake .. -DCMAKE_BUILD_TYPE=Debug
 cmake --build .
+cmake --build .
 ctest --output-on-failure
+```
+
+### Building the UI
+
+```bash
+cd src/ui
+npm install
+# Development
+./node_modules/.bin/vite     # Start server
+./node_modules/.bin/electron . # Start app
+# Production Build
+npm run build
 ```
 
 ## License

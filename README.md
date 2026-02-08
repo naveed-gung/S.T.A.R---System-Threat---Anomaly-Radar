@@ -37,6 +37,8 @@ Built with a dual-architecture design for both Windows and Linux, S.T.A.R. combi
 - **Kernel Drivers** -- Windows filter driver (star.sys) and Linux kernel module (star.ko) for process/thread/network monitoring
 - **Event Processing** -- Priority-based event queue, lock-free ring buffer for kernel-to-user communication, configurable sampling rates
 - **Attack Chain Detection** -- Event correlation engine for identifying multi-stage attacks with MITRE ATT&CK technique mapping
+- **Web  UI** --  dashboard with real-time radar, CRT effects, and threat level visualization.
+- **Smart Whitelisting** -- Built-in noise reduction to filter out legitimate JIT compilers (Chrome, VS Code, Electron) and focus on true anomalies.
 
 ### Security & Ethics
 - **Local Operation Only** -- No outbound network connections, air-gap compatible
@@ -148,14 +150,30 @@ int main(void)
 }
 ```
 
-## Roadmap
+### Running the Dashboard (UI)
 
-| Phase | Timeline | Status | Description |
-|-------|----------|--------|-------------|
-| **Phase 1: Foundation** | Weeks 1-4 | In Progress | Cross-platform abstraction, process enumeration, kernel driver skeleton |
-| **Phase 2: Core Detection** | Weeks 5-10 | Planned | Memory analysis, hook detection, behavioral profiling |
-| **Phase 3: Real-Time System** | Weeks 11-14 | Planned | Event correlation, network monitoring, MITRE mapping |
-| **Phase 4: UI & Polish** | Weeks 15-20 | Planned | Web dashboard, Electron wrapper, installers |
+S.T.A.R. features a React + Electron dashboard that communicates with the daemon via Named Pipes.
+
+1.  **Start the Daemon**:
+    ```powershell
+    # In Terminal 1
+    ./build/src/daemon/star-daemon.exe --console
+    ```
+
+2.  **Start the UI**:
+    *(Note: Run these in Git Bash or similar if standard cmd fails due to path issues)*
+    ```bash
+    cd src/ui
+    npm install
+    
+    # In Terminal 2 (UI Server)
+    ./node_modules/.bin/vite
+    
+    # In Terminal 3 (App Window)
+    ./node_modules/.bin/electron .
+    ```
+```
+
 
 ### Performance Targets
 

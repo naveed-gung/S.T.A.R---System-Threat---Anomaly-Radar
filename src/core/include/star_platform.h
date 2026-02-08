@@ -16,13 +16,13 @@
  * ============================================================ */
 
 #if defined(_WIN32) || defined(_WIN64)
-    #define STAR_PLATFORM_WINDOWS 1
-    #define STAR_PLATFORM_NAME "Windows"
+#define STAR_PLATFORM_WINDOWS 1
+#define STAR_PLATFORM_NAME "Windows"
 #elif defined(__linux__)
-    #define STAR_PLATFORM_LINUX 1
-    #define STAR_PLATFORM_NAME "Linux"
+#define STAR_PLATFORM_LINUX 1
+#define STAR_PLATFORM_NAME "Linux"
 #else
-    #error "Unsupported platform. S.T.A.R. supports Windows and Linux only."
+#error "Unsupported platform. S.T.A.R. supports Windows and Linux only."
 #endif
 
 /* ============================================================
@@ -62,7 +62,8 @@ STAR_STATUS star_platform_enum_processes(STAR_PROCESS_LIST *list);
  * Get detailed information about a specific process by PID.
  * Populates the provided STAR_PROCESS_INFO structure.
  */
-STAR_STATUS star_platform_get_process_info(uint32_t pid, STAR_PROCESS_INFO *info);
+STAR_STATUS star_platform_get_process_info(uint32_t pid,
+                                           STAR_PROCESS_INFO *info);
 
 /* --- Memory Analysis --- */
 
@@ -71,20 +72,17 @@ STAR_STATUS star_platform_get_process_info(uint32_t pid, STAR_PROCESS_INFO *info
  * Allocates and populates a linked list of STAR_MEMORY_REGION.
  * Caller must free the list with star_memory_region_list_free().
  */
-STAR_STATUS star_platform_enum_memory_regions(uint32_t pid, STAR_MEMORY_REGION **regions);
+STAR_STATUS star_platform_enum_memory_regions(uint32_t pid,
+                                              STAR_MEMORY_REGION **regions);
 
 /*
  * Read memory from a target process.
  * buffer must be pre-allocated with at least 'size' bytes.
  * bytes_read receives the actual number of bytes read.
  */
-STAR_STATUS star_platform_read_process_memory(
-    uint32_t pid,
-    uint64_t address,
-    void *buffer,
-    size_t size,
-    size_t *bytes_read
-);
+STAR_STATUS star_platform_read_process_memory(uint32_t pid, uint64_t address,
+                                              void *buffer, size_t size,
+                                              size_t *bytes_read);
 
 /* --- Kernel Structure Access --- */
 
@@ -120,8 +118,8 @@ uint64_t star_platform_get_total_memory(void);
 /* --- Utility --- */
 
 /*
- * Elevate privileges if possible (SeDebugPrivilege on Windows, CAP_SYS_PTRACE on Linux).
- * Returns STAR_STATUS_ACCESS_DENIED if elevation fails.
+ * Elevate privileges if possible (SeDebugPrivilege on Windows, CAP_SYS_PTRACE
+ * on Linux). Returns STAR_STATUS_ACCESS_DENIED if elevation fails.
  */
 STAR_STATUS star_platform_elevate_privileges(void);
 
@@ -130,5 +128,7 @@ STAR_STATUS star_platform_elevate_privileges(void);
 void star_process_list_free(STAR_PROCESS_LIST *list);
 void star_memory_region_list_free(STAR_MEMORY_REGION *regions);
 void star_detection_list_free(STAR_DETECTION_LIST *list);
+STAR_STATUS star_detection_list_append(STAR_DETECTION_LIST *list,
+                                       const STAR_DETECTION *detection);
 
 #endif /* STAR_PLATFORM_H */
