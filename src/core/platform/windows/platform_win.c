@@ -184,7 +184,6 @@ STAR_STATUS star_platform_enum_processes(STAR_PROCESS_LIST *list)
     BYTE *current = (BYTE *)buffer;
     while (1) {
         /* Read the NextEntryOffset at offset 0 */
-        ULONG next_offset = *(ULONG *)current;
         /* UniqueProcessId is at a known offset in the structure */
         /* We use the documented offsets for the structure */
 
@@ -221,9 +220,9 @@ STAR_STATUS star_platform_enum_processes(STAR_PROCESS_LIST *list)
         info.ppid = pe32.th32ParentProcessID;
         info.thread_count = pe32.cntThreads;
 
-        /* Convert wide string process name to char */
-        WideCharToMultiByte(CP_UTF8, 0, pe32.szExeFile, -1,
-                           info.name, STAR_MAX_PROCESS_NAME, NULL, NULL);
+        /* Copy process name (szExeFile is already a narrow string) */
+        strncpy(info.name, pe32.szExeFile, STAR_MAX_PROCESS_NAME - 1);
+        info.name[STAR_MAX_PROCESS_NAME - 1] = '\0';
 
         /* Get additional info via OpenProcess */
         HANDLE hProcess = OpenProcess(

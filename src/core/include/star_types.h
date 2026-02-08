@@ -198,4 +198,19 @@ typedef struct _STAR_PROCESS_LIST {
     uint32_t          count;
 } STAR_PROCESS_LIST;
 
+/* Ring buffer for kernel events */
+typedef struct _STAR_RING_BUFFER {
+    KERNEL_EVENT *buffer;
+    uint32_t     capacity;
+    uint32_t     write_index;
+    uint32_t     read_index;
+} STAR_RING_BUFFER;
+
+/* Priority-based event queue */
+typedef struct _STAR_EVENT_QUEUE {
+    STAR_DETECTION_LIST queues[EVENT_PRIORITY_COUNT];
+    uint32_t            total_count;
+    bool                running;
+} STAR_EVENT_QUEUE;
+
 #endif /* STAR_TYPES_H */
